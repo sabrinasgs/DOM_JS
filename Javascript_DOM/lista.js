@@ -1,36 +1,34 @@
+//Não lembro qual linha fazia o botão de submit sumir...
+//Com isso, ele some e não consigo editar o elemento da lista, pois, ele não salva ;-;
 function DeleteItem(){
-    console.log(this.parentElement)
+    //console.log(this.parentElement)
     this.parentElement.remove()
 }
 function EditItem(){
      // console.log(this.parentElement) /Pq não funfou? ;-;
      //this.parentElement.edit()
-    let FatherElement = this.parentElement
-    console.log(FatherElement)
-    FatherElement.innerHTML = '';
-    const novo_item_lista = document.createElement('input');
-    FatherElement.appendChild(novo_item_lista)
-    FatherElement.appendChild(CriarBotaoEdit())
-    FatherElement.appendChild(CriarBotaoConcluido())
-  }
-  function ConcluidoItem(){
-    var input_element = this.parentElement.children[0]
-    console.log(input_element.value)
-    console.log(this.parentElement)
-    lista = this.parentElement
-    this.parentElement.innerHTML = input_element.value
-    lista.appendChild(CriarBotaoDelete())
-    lista.appendChild(CriarBotaoEdit())
-}
-function CriarBotaoConcluido(){
-    const botao_concluido =  document.createElement('button')
-    botao_concluido.classList.add("btn", "btn-success")
-    botao_concluido.innerHTML = "Concluido"
-    botao_concluido.type = "button"
-    botao_concluido.addEventListener("click", ConcluidoItem);
+    item_lista = this.parentElement
+    texto_item_lista = item_lista.innerText.replace("DeleteEdit", "")
+    input_element = document.querySelector('[data-form-input]')
+    input_element.value = texto_item_lista
 
-    return botao_concluido
+    const botao_submit = document.querySelector ('[button-submit')
+    botao_submit.className = 'd-none'
+
+    const botao_edit = document.querySelector('[button-edit')
+    botao_edit.classList.remove('d-done')
+  }
+
+  function CriarBotaoEdit (){
+    const botao_edit =  document.createElement('button')
+    botao_edit.classList.add("btn", "btn-warning")
+    botao_edit.innerHTML = "Edit"
+    botao_edit.type = "button"
+    botao_edit.addEventListener("click", EditItem);
+
+    return botao_edit
 }
+
 function CriarBotaoDelete(){
     const botao_delete =  document.createElement('button')
     botao_delete.classList.add("btn", "btn-danger")
@@ -40,18 +38,8 @@ function CriarBotaoDelete(){
 
     return botao_delete
 }
-function CriarBotaoEdit (){
-    const botao_edit = document.createElement('button')
-    botao_edit.classList.add("btn", "btn-warning")
-    botao_edit.innerHTML = "Edit"
-    botao_edit.type = "button"
-    botao_edit.addEventListener("click", EditItem)
-
-    return botao_edit
-}
 
 function Submit(){
-    
     const lista = document.querySelector('[data-task]')
     const valor = document.querySelector('[data-form-input]')
 
@@ -65,6 +53,23 @@ function Submit(){
     lista.appendChild (novo_item_lista)
 
     document.getElementById("item").value = ""
+}
+function Edit(){
+    texto_adicionado = input_element.value
+    item_lista.innerHTML = texto_adicionado
+
+    item_lista.appendChild(CriarBotaoDelete())
+    item_lista.appendChild(CriarBotaoEdit())
+
+    const botao_submit = document.querySelector('[button-submit]')
+    botao_submit.classList.remove('d-none')
+    botao_submit.classList.add('btn', 'btn-dark')
+
+    const botao_edit = document.querySelector('[button-edit]')
+    botao_edit.classList.add('d-none')
+
+    input_element.value = '';
+
 }
 
 
