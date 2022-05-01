@@ -1,5 +1,4 @@
-//Não lembro qual linha fazia o botão de submit sumir...
-//Com isso, ele some e não consigo editar o elemento da lista, pois, ele não salva ;-;
+//https://getbootstrap.com.br/docs/4.1/components/buttons/
 function DeleteItem(){
     //console.log(this.parentElement)
     this.parentElement.remove()
@@ -13,7 +12,8 @@ function EditItem(){
     input_element.value = texto_item_lista
 
     const botao_submit = document.querySelector ('[button-submit')
-    botao_submit.className = 'd-none'
+    // botao_submit.className = 'd-none'
+    //Comentado pois essa linha faz sumir o botão de submit, sendo assim, não salva a informação editada.
 
     const botao_edit = document.querySelector('[button-edit')
     botao_edit.classList.remove('d-done')
@@ -27,7 +27,7 @@ function EditItem(){
     botao_edit.addEventListener("click", EditItem);
 
     return botao_edit
-}
+  }
 
 function CriarBotaoDelete(){
     const botao_delete =  document.createElement('button')
@@ -54,6 +54,7 @@ function Submit(){
 
     document.getElementById("item").value = ""
 }
+
 function Edit(){
     texto_adicionado = input_element.value
     item_lista.innerHTML = texto_adicionado
@@ -62,15 +63,16 @@ function Edit(){
     item_lista.appendChild(CriarBotaoEdit())
 
     const botao_submit = document.querySelector('[button-submit]')
-    botao_submit.classList.remove('d-none')
+   // botao_submit.classList.remove('d-none')
     botao_submit.classList.add('btn', 'btn-dark')
 
     const botao_edit = document.querySelector('[button-edit]')
     botao_edit.classList.add('d-none')
 
     input_element.value = '';
-
 }
+ 
+
 
 
 
